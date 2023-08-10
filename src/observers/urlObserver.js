@@ -1,5 +1,5 @@
 // Define a class for observing URL changes
-class UrlObserver {
+export class UrlObserver {
   constructor(callback) {
     // Store the callback function that will be called when the URL changes
     this.callback = callback;
@@ -61,7 +61,9 @@ class UrlObserver {
   }
 }
 
-// Create a new instance of the UrlObserver class with a callback function that logs the new URL to the console
-const urlObserver = new UrlObserver((url) => {
-  console.log("Callback function called with URL:", url);
-});
+// Export a function that creates a new instance of the UrlObserver class
+export function createUrlObserver(callback) {
+  return new UrlObserver(callback);
+}
+
+
