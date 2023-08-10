@@ -1,4 +1,4 @@
-export function getQueryParams() {
+function getQueryParams() {
   // Select hash formattedQuery from URL
   let hashQuery = ''
   const hashString = window.location.hash;
@@ -89,4 +89,17 @@ export function getQueryParams() {
     originalQuery
   }
   return queryParam;
+}
+
+export function attachReactiveQuery() {
+  const query = getQueryParams()
+  const handler = {
+    set(target, property, value) {
+      target[property] = value;
+      // Trigger a callback function here to update the URL with the new query parameters
+      return true;
+    }
+  };
+  const reactiveQuery = new Proxy(query, handler);
+  window.dyna = { ...window.dyna, query: reactiveQuery };
 }
